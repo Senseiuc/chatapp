@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChatController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -32,4 +33,11 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+    Route::get('/chat', function () {
+        return Inertia::render('Chat/container');
+    })->name('chat');
+
+    Route::get('/chat/rooms',[ChatController::class,'rooms']);
+    Route::get('/chat/room/{roomId}/messages',[ChatController::class,'messages']);
+    Route::post('/chat/room/{roomId}/message',[ChatController::class,'newMessage']);
 });
